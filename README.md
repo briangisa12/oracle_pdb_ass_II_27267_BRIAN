@@ -59,13 +59,16 @@ PDB Name	 br_pdb_27267
 Username   inside PDB	brian_plsqlauca_27267
 
 Password	 ************
+
 Step 1 – Connect as SYS and confirm we are in the root container
 
 SHOW CON_NAME;   -- Result: CDB$ROOT
+
 Step 2 – Find the location of the seed datafiles (con_id = 2 is PDB$SEED)
 
 SELECT name FROM v$datafile WHERE con_id = 2;
 -- Result: C:\APP\ORACLE\ORADATA\FREE\PDBSEED\SYSTEM01.DBF ...
+
 Step 3 – Create the PDB from the seed
 
 CREATE PLUGGABLE DATABASE br_pdb_27267
@@ -76,6 +79,7 @@ CREATE PLUGGABLE DATABASE br_pdb_27267
   );
 ADMIN USER is mandatory when creating a PDB from the seed; it becomes the PDB's local administrator.
 FILE_NAME_CONVERT tells Oracle where to copy the seed datafiles for the new PDB.
+
 Step 4 – Open the PDB and keep it open after restarts
 
 ALTER PLUGGABLE DATABASE br_pdb_27267 OPEN;
@@ -87,10 +91,12 @@ NAME              OPEN_MODE
 PDB$SEED          READ ONLY
 FREEPDB1          READ WRITE
 BR_PDB_27267      READ WRITE
+
 Step 5 – Switch into the PDB
 
 ALTER SESSION SET CONTAINER = br_pdb_27267;
 SHOW CON_NAME;   -- Result: BR_PDB_27267
+
 Step 6 – Create the user inside the PDB and grant privileges
 
 CREATE USER brian_plsqlauca_27267 IDENTIFIED BY ********;
@@ -98,6 +104,7 @@ CREATE USER brian_plsqlauca_27267 IDENTIFIED BY ********;
 GRANT CONNECT, RESOURCE, CREATE SESSION TO brian_plsqlauca_27267;
 GRANT CREATE TABLE, CREATE VIEW, CREATE PROCEDURE, CREATE SEQUENCE TO brian_plsqlauca_27267;
 GRANT UNLIMITED TABLESPACE TO brian_plsqlauca_27267;
+
 Step 7 – Verify the user is local to the PDB
 
 SELECT username, common, created
@@ -108,6 +115,7 @@ Result:
 USERNAME                COMMON  CREATED
 BRIAN_PLSQLAUCA_27267   NO      22-SEPT-26
 COMMON = NO proves the user is a local user created inside the PDB, not a common user in the root.
+
 
 Step 8 – Log in as the new user
 
