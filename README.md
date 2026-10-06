@@ -52,7 +52,7 @@ brian_pdb	brian_plsqlauca_27267	default	br_pdb_27267	Working user inside the PDB
 
 Naming conventions used
 
-Item	       Value
+Item	        Value
 
 PDB Name	 br_pdb_27267
 
