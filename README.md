@@ -53,8 +53,11 @@ brian_pdb	brian_plsqlauca_27267	default	br_pdb_27267	Working user inside the PDB
 Naming conventions used
 
 Item	       Value
+
 PDB Name	 br_pdb_27267
+
 Username   inside PDB	brian_plsqlauca_27267
+
 Password	 ************
 Step 1 – Connect as SYS and confirm we are in the root container
 
