@@ -1,31 +1,52 @@
 # oracle_pdb_ass_II_27267_BRIAN
 Assignment II – Oracle Pluggable Databases (PDB)
+
 Student Name:	Brian GANZA GISAGARA 
+
 Student ID:	27267
+
 Course:	PL/SQL 
+
 Date	22 September 2026
+
 1. Overview of Tasks
-Task	Description	Result
+Task	                          Description	Result
+
 Task 1	Create a new Pluggable Database and a user inside it	✅ BR_PDB_27267 created, user BRIAN_PLSQLAUCA_27267 created inside it
+
 Task 2	Create a temporary PDB, verify it, delete it completely, and confirm deletion	✅ BR_TO_DELETE_PDB_27267 created, verified, dropped (including datafiles)
+
 Task 3	Access Oracle Enterprise Manager / a monitoring dashboard showing the environment, PDB tasks and username	✅ Done using SQL Developer DBA Instance Viewer (see Challenge 5)
+
 Task 4	Document all work in this README	✅ This file
+
 2. Oracle Environment Used
-Item	Value
+Item	                        Value
+
 Operating System	Windows 11 Pro Education (64-bit)
+
 Database	Oracle AI Database 26ai Free (reports internal version 23.0.0.0)
+
 Container Database (CDB)	FREE (service name FREE)
 Default PDB	FREEPDB1
+
 Listener	localhost:1521
+
 Datafile location	C:\APP\ORACLE\ORADATA\FREE\
+
 Client tool	Oracle SQL Developer
+
 Monitoring dashboard	SQL Developer → DBA panel → Instance Viewer
+
 SQL Developer Connections
+
 Connection Name	Username	Role	Service Name	Purpose
+
 SYS_CDB	sys	SYSDBA	FREE	Administration in the CDB root
+
 brian_pdb	brian_plsqlauca_27267	default	br_pdb_27267	Working user inside the PDB
 
-3. Explanation of Each Task
+4. Explanation of Each Task
    
 **Task 1 – Create a New Pluggable Database**
 
