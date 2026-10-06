@@ -24,9 +24,11 @@ SQL Developer Connections
 Connection Name	Username	Role	Service Name	Purpose
 SYS_CDB	sys	SYSDBA	FREE	Administration in the CDB root
 brian_pdb	brian_plsqlauca_27267	default	br_pdb_27267	Working user inside the PDB
+
 3. Explanation of Each Task
    
-Task 1 – Create a New Pluggable Database
+**Task 1 – Create a New Pluggable Database**
+
 Naming conventions used
 
 Item	       Value
@@ -96,7 +98,9 @@ done
 PDB created successfully
 done
 User created inside the PDB
-Task 2 – Create and Delete a PDB
+
+**Task 2 – Create and Delete a PDB**
+
 Temporary PDB name: br_to_delete_pdb_27267
 
 Step 1 – Return to the root container (PDBs can only be created/dropped from CDB$ROOT)
@@ -145,7 +149,9 @@ done
 Delete the PDB completely
 done
 Confirm that it no longer exists
-Task 3 – Oracle Enterprise Manager (Dashboard)
+
+**Task 3 – Oracle Enterprise Manager (Dashboard)**
+
 !!! Oracle removed Enterprise Manager Database Express (EM Express) starting with Oracle Database 23ai, so it is not available in the 26ai Free installation used here. The equivalent built-in monitoring dashboard in Oracle SQL Developer was used instead.
 
 Steps
@@ -173,27 +179,31 @@ done
 Dashboard reflects completed PDB tasks
 done
 Username visible on dashboard
-4. Challenges Faced and How They Were Solved
-#	Challenge	Cause	Solution
-1	ORA-12541: Cannot connect. No listener at host localhost port 1521	No Oracle Database server was installed on the computer (SQL Developer is only a client).	Installed Oracle AI Database 26ai Free using setup.exe (run as administrator), to a path without spaces (C:\app\oracle\).
+
+**4. Challenges Faced and How They Were Solved**
+
+#	           **Challenge**	                                                                                          **Cause**	                                                                                                 **Solution**
+
+1	ORA-12541: Cannot connect. No listener at host localhost port 1521	 No Oracle Database server was installed on the computer (SQL Developer is only a client).	    Installed Oracle AI Database 26ai Free using setup.exe (run as administrator), to a path without spaces (C:\app\oracle\).
+
 2	SYS connection would not work with default settings	SYS must connect with the SYSDBA role, and the CDB service name is FREE, not orcl.	Set Role = SYSDBA and Service name = FREE in the connection.
+
 3	ORA-65005: missing or invalid file name pattern for file when creating the PDB	FILE_NAME_CONVERT used the path ...\ORCL\PDBSEED\, but the real seed path is ...\FREE\PDBSEED\.	Checked the real path with SELECT name FROM v$datafile WHERE con_id = 2; and changed ORCL to FREE.
+
 4	A new PDB has no USERS tablespace, so the new user could not store data	PDBs created from the seed only include SYSTEM, SYSAUX, UNDO and TEMP.	Granted UNLIMITED TABLESPACE to the user.
+
 5	The SYS_CDB session was still inside BR_PDB_27267 after Task 1	ALTER SESSION SET CONTAINER lasts for the whole session.	Ran ALTER SESSION SET CONTAINER = CDB$ROOT; before Task 2.
+
 6	OEM Database Express was not available (nothing on port 5500)	EM Express was removed by Oracle starting with 23ai.	Used SQL Developer's DBA → Instance Viewer dashboard plus a cdb_users query to show the environment, PDBs and username.
-5. Evidence (Screenshots)
-Task	Screenshot
-Task 1	screenshots/task1_pdb_created.png – v$pdbs showing BR_PDB_27267 READ WRITE
-Task 1	screenshots/task1_user_created.png – dba_users showing BRIAN_PLSQLAUCA_27267, COMMON = NO
-Task 1	screenshots/task1_user_login.png – connected as the new user inside BR_PDB_27267
-Task 2	screenshots/task2_pdb_creation.png – create command + result
-Task 2	screenshots/task2_pdb_deletion.png – drop command + result
-Task 3	screenshots/task3_dashboard.png – Instance Viewer + PDBs + username
-Task 3	screenshots/task3_pdb_details.png – BR_PDB_27267 details
-6. Integrity Statement
+
+**5. Integrity Statement**
+
 I confirm that all the tasks in this assignment were carried out by me on my own computer, and that every command, result and screenshot in this repository comes from my own Oracle environment. I used an AI assistant for guidance and for help troubleshooting errors. I ran every command myself, checked each result, and understand what each step does. Passwords have been left out of this document on purpose.
 
-7. Submission Details
+**6. Submission Details**
+
 Repository Link:     [https://github.com/briangisa12/oracle_pdb_ass_II_27267_BRIAN]
+
 PDB Name Created:    br_pdb_27267
+
 Issues Encountered:  Yes
